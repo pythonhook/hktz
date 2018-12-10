@@ -3,17 +3,10 @@
 #数据库信息
 DB_TEST_HOST="172.16.10.43";
 DB_TEST_PORT=3306;
-DB_TEST_DBNAME="test";
+DB_TEST_DBNAME="hktz";
 DB_TEST_USER="root";
-
-
 DB_TEST_PASSWORD="aokai100";
 
-# DB_TEST_HOST="172.16.10.105";
-# DB_TEST_PORT=3306;
-# DB_TEST_DBNAME="ihwdz_member";
-# DB_TEST_USER="root";
-# DB_TEST_PASSWORD="hongwang";
 #数据库连接编码
 DB_CHARSET="utf8";
 

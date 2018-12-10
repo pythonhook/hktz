@@ -1,15 +1,26 @@
 #-*- coding: UTF-8 -*-
 
 import core.config.global_var as fd
+import schedule
 import threading
-import json
-from time import time
+import time
 from flask import Flask, jsonify, request
-from utils.timer_task import update_position_status, update_admin_score
-
+from utils.timer_task import update_position_status, update_admin_score, stock_info
 
 # 实例化APP
 app = Flask(__name__)
+
+def s_jobs():
+    #东方财富数据更新
+    schedule.every(10).seconds.do(stock_info)
+    #更新仓位
+    schedule.every(15).seconds.do(update_position_status)
+    # 打分
+    schedule.every(50).minutes.do(update_admin_score)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
+
 
 @app.route('/api/index', methods=['GET'])
 def index():
@@ -28,6 +39,7 @@ def index():
 
 
 if __name__ == '__main__':
-    timer1 = threading.Timer(1, update_position_status).start()
-    timer2 = threading.Timer(5, update_admin_score).start()
+    timer1 = threading.Timer(1, s_jobs).start()
     app.run(host='0.0.0.0', port=5000)
+
+

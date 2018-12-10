@@ -274,8 +274,8 @@ class StockBreed(object):
                             db.cursor.execute("update ihwdz_reporter_position set  is_out_date = 1  where id = %s", (row["id"]))
                             db.conn.commit()
                         except Exception as errorMsg:
-                            continue
                             log.error(errorMsg)
+                            continue
                 log.info("************update_reporter_score*********** END")
         pass
 
